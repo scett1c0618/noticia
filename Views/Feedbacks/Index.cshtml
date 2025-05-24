@@ -1,0 +1,40 @@
+@model IEnumerable<noticia.Controllers.FeedbackViewModel>
+
+@{
+    ViewData["Title"] = "Feedbacks registrados";
+}
+
+<h1>Feedbacks registrados</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Usuario</th>
+            <th>Post Id</th>
+            <th>Sentimiento</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var f in Model)
+    {
+        <tr>
+            <td>@f.Id</td>
+            <td>@f.UserName (@f.UserId)</td>
+            <td>@f.PostId</td>
+            <td>
+                @if (f.Sentimiento == "like")
+                {
+                    <span class="text-success">👍 Me gustó</span>
+                }
+                else
+                {
+                    <span class="text-danger">👎 No me gustó</span>
+                }
+            </td>
+            <td>@f.Fecha.ToString("g")</td>
+        </tr>
+    }
+    </tbody>
+</table>
