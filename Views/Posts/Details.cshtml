@@ -1,0 +1,30 @@
+@model noticia.Services.Post
+@{
+    ViewData["Title"] = Model.Title;
+    var author = ViewBag.Author as noticia.Services.User;
+    var comments = ViewBag.Comments as List<noticia.Services.Comment>;
+}
+
+<h1>@Model.Title</h1>
+<p>@Model.Body</p>
+
+<h3>Autor</h3>
+<p>@author?.Name (@author?.Email)</p>
+
+<h3>Comentarios</h3>
+@if (comments != null && comments.Count > 0)
+{
+    <ul>
+    @foreach (var comment in comments)
+    {
+        <li>
+            <strong>@comment.Name</strong> (@comment.Email):<br />
+            @comment.Body
+        </li>
+    }
+    </ul>
+}
+else
+{
+    <p>No hay comentarios.</p>
+}
